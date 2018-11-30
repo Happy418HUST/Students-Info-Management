@@ -13,17 +13,17 @@ import com.example.test.model.Student;
 @Mapper
 public interface StudentService {
 
-    @Select("SELECT * FROM MOXI.Student WHERE ID = #{id};")
+    @Select("SELECT * FROM STUDENTSMANAGEMENT.Student WHERE ID = #{id};")
     Student findById(Student studen);
 
     @Select({
-            "SELECT * FROM MOXI.STUDENT ",
+            "SELECT * FROM STUDENTSMANAGEMENT.STUDENT ",
             "WHERE STATE = 1 ;",
     })
     List<Student> list(Student student);
 
     @Select({
-            "SELECT COUNT(*) FROM MOXI.STUDENT N ",
+            "SELECT COUNT(*) FROM STUDENTSMANAGEMENT.STUDENT N ",
             "WHERE N.STATE = 1 ;",
     })
     int count(Student student);

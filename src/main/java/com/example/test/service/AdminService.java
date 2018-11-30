@@ -14,19 +14,19 @@ import com.example.test.model.Admin;
 public interface AdminService {
     //sql语句里的用井号和花括号括起来的参数，对应实体类里的各个同名属性
     //例如#{userName}  对应了    参数admin对象的userName属性
-    @Select("SELECT * FROM `moxi`.`admin` where userName = #{userName} and password = #{password} ;")
+    @Select("SELECT * FROM `studentsmanagement`.`admin` where userName = #{userName} and password = #{password} ;")
     Admin findByNameAndPassword(Admin admin);
 
-    @Select("SELECT * FROM `moxi`.`admin` where userName = #{userName} and password = #{password} and realName = #{realName}")
+    @Select("SELECT * FROM `studentsmanagement`.`admin` where userName = #{userName} and password = #{password} and realName = #{realName}")
     List<Admin> findByAdminWithPage(Admin admin, int start, int end);
 
-    @Insert("INSERT INTO `moxi`.`admin` (`id`, `userName`, `password`, `realName`, `age`, `phoneNumber`, `headPicture`, `addDate`, `updateDate`, `state`) VALUES (null, #{userName}, #{password}, #{realName}, #{age}, #{phoneNumber}, #{headPicture}, now(), now(), 0);")
+    @Insert("INSERT INTO `studentsmanagement`.`admin` (`id`, `userName`, `password`, `realName`, `age`, `phoneNumber`, `headPicture`, `addDate`, `updateDate`, `state`) VALUES (null, #{userName}, #{password}, #{realName}, #{age}, #{phoneNumber}, #{headPicture}, now(), now(), 0);")
     int insert(Admin admin);
 
-    @Update("UPDATE `moxi`.`admin` SET `userName` = #{userName}, `password` = #{password}, `realName` = #{realName}, `age` = #{age}, `phoneNumber` = #{phoneNumber}, `headPicture` = #{headPicture}, `updateDate` = now(), `state` = #{state} WHERE `id` = #{id};")
+    @Update("UPDATE `studentsmanagement`.`admin` SET `userName` = #{userName}, `password` = #{password}, `realName` = #{realName}, `age` = #{age}, `phoneNumber` = #{phoneNumber}, `headPicture` = #{headPicture}, `updateDate` = now(), `state` = #{state} WHERE `id` = #{id};")
     int updateStateById(int id);
 
-    @Delete("DELETE FROM `moxi`.`admin` WHERE id  = #{id}")
+    @Delete("DELETE FROM `studentsmanagement`.`admin` WHERE id  = #{id}")
     int deleteById(int id);
 }
 
