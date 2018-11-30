@@ -57,38 +57,44 @@
     <div class="modal fade" id="modal_add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" >新增一条记录</h4>
-                </div>
-                <div class="modal-body">
-                    <label class="" for="add_id">学号</label>
-                    <div class="">
-                        <input type="text" class="form-control" id="add_id">
+                <form class="m-t" role="form" action="index/add" method="post">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" >新增一条记录</h4>
                     </div>
-                    <br>
-                    <label class="" for="add_name">姓名</label>
-                    <div class="">
-                        <input type="text" class="form-control" id="add_name">
-                    </div>
-                    <br>
-                    <label class="" for="add_major">专业</label>
-                    <div class="">
-                        <input type="text" class="form-control" id="add_major">
-                    </div>
-                    <br>
-                    <label class="" for="add_joinDate">入学日期</label>
-                    <div class="input-group date myDatetimepicker" id = "add_joinDate">
-                        <input type="text" class="form-control" >
-                        <span class="input-group-addon">
+                    <div class="modal-body">
+
+
+
+                        <label class="" for="add_id">学号</label>
+                        <div class="">
+                            <input type="text" class="form-control" id="add_id" placeholder="学号" name="id">
+                        </div>
+                        <br>
+                        <label class="" for="add_name">姓名</label>
+                        <div class="">
+                            <input type="text" class="form-control" id="add_name" placeholder="姓名" name="name">
+                        </div>
+                        <br>
+                        <label class="" for="add_major">专业</label>
+                        <div class="">
+                            <input type="text" class="form-control" id="add_major" placeholder="专业" name="major">
+                        </div>
+                        <br>
+                        <label class="" for="add_joinDate">入学日期</label>
+                        <div class="input-group date myDatetimepicker" id = "add_joinDate">
+                            <input type="text" class="form-control" name="入学日期">
+                            <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                         </span>
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary">保存</button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="submit" class="btn btn-primary">保存</button>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
@@ -151,7 +157,7 @@
     </div>
     <!--表格-->
     <div >
-        <!--重要！！-->
+
         <table id = students>
             <thead>
             <tr>
@@ -159,22 +165,15 @@
                 <th >学号</th>
                 <th >姓名</th>
                 <th >专业</th>
-                <th >入学时间</th>
+                <th >入学日期</th>
             </tr>
             </thead>
-            <tbody>
-            <tr th:each="student : ${studentList}">
-                <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
-                <td th:text="${student.id}">Onions</td>
-                <td th:text="${student.name}">Onions</td>
-                <td th:text="${student.major}">Onions</td>
-                <td th:text="${student.joinDate}">Onions</td>
-            </tr>
+            <tbody  id = "students_tbody">
+
             </tbody>
         </table>
     </div>
 </div>
-
 
 <!-- Mainly scripts -->
 <script th:src="@{/js/jquery-2.1.1.js}"></script>
@@ -187,28 +186,54 @@
 
 <!-- Sweet alert -->
 <script th:src="@{/js/plugins/sweetalert/sweetalert.min.js}"></script>
-<script type="text/javascript">
-    $(".myDatetimepicker").datetimepicker({
-        format: 'yyyy-mm-dd' ,//显示格式
-        language:  'zh-CN',
-        todayHighlight: 1,//今天高亮
-        minView: "month",//设置只显示到月份
-        startView:2,
-        autoclose: 1//选择后自动关闭
-    });
-</script>
 <script>
+    loadStudents();
 
-    table();
-    function table(){
-        var publications_html="";
+    setDateTimePicker();
+    function setDateTime() {
+    $(document).ready(function() {
         $('#students').bootstrapTable({
             pagination: "true"  ,
             pageSize:"5",
             pageList:[,10, 25, 50, 100]
         });
-
+    })}
+    function setDateTimePicker() {
+        $(".myDatetimepicker").datetimepicker({
+            format: 'yyyy-mm-dd' ,//显示格式
+            language:  'zh-CN',
+            todayHighlight: 1,//今天高亮
+            minView: "month",//设置只显示到月份
+            startView:2,
+            autoclose: 1//选择后自动关闭
+        });
     }
+    function loadStudents() {
+        $.ajax({
+            type: "get",
+            url: "/index/data",
+            dataType: "json",
+            success: function (data) {
+                $.each(data, function (i, n) {
+                    //<td th:text="${student.joinDate}">Onions</td>
+                    var html = "<tr><td class=\"bs-checkbox \"><input data-index=\"0\" name=\"btSelectItem\" type=\"checkbox\"></td>"
+                        +"<td> "+ n.id + "</td>";
+                    html += "<td> "+ n.name + "</td>";
+                    html += "<td> "+ n.major + "</td>";
+                    html += "<td> "+ n.joinDate + "</td></tr>";
+                    //alert(html);
+                    $("#students_tbody").append(html);
+                })
+            },
+            error: function () {
+                alert("ajax error!!");
+            }
+        })
+        setDateTime();
+    }
+
 </script>
+
+
 </body>
 </html>

@@ -28,5 +28,6 @@ public interface StudentService {
     })
     int count(Student student);
 
-
+    @Insert("INSERT INTO `STUDENTSMANAGEMENT`.`STUDENT` (`id`, `password`,`name`,`major`,`joinDate`, `state`) VALUES (#{id}, 1234,#{name}, #{major}, #{joinDate} ,1);")
+    int insert(Student student);
 }

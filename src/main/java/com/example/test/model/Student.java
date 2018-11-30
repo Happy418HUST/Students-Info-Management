@@ -6,7 +6,6 @@ public class Student {
     private String id;
     private String password;
     private String name;
-    private int age;
     private String major;
     private Date joinDate;
     private int state;
@@ -41,15 +40,6 @@ public class Student {
     public void setMajor(String major) {
         this.major = major;
     }
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-
 
     public Date getJoinDate() {
         return joinDate;
@@ -70,7 +60,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Admin [id=" + id + ", name=" + name + ", password=" + password + ", age=" + age
+        return "Admin [id=" + id + ", name=" + name + ", password=" + password
                 + ", joinDate=" + joinDate + ", state=" + state + "]";
     }
 
