@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Students' Information Management</title>
+    <!-- css -->
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+    <link th:href="@{/css/bootstrap-table.css}" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="table-responsive">
+        <table id = students>
+        <thead>
+        <tr>
+            <th >学号</th>
+            <th >姓名</th>
+            <th >专业</th>
+            <th >入学时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student : ${studentList}">
+            <td th:text="${student.id}">Onions</td>
+            <td th:text="${student.name}">Onions</td>
+            <td th:text="${student.major}">Onions</td>
+            <td th:text="${student.joinDate}">Onions</td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+
+    <!-- Mainly scripts -->
+    <script th:src="@{/js/jquery-2.1.1.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/bootstrap-table.js}"></script>
+    <script th:src="@{/js/popper.min.js}"></script>
+    <!-- Sweet alert -->
+    <script th:src="@{/js/plugins/sweetalert/sweetalert.min.js}"></script>
+<script>
+    load_publications();
+    function load_publications(){
+        var publications_html="";
+        $('#students').bootstrapTable({
+            pagination: "true"  ,
+            pageSize:"5",
+            pageList:[,10, 25, 50, 100]
+        });
+    }
+</script>
+</body>
+</html>
