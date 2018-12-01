@@ -35,7 +35,7 @@ public class StudentController {
 //        model.addAttribute("student",student);
         return studentList;
     }
-    @PostMapping("/select")
+    @RequestMapping("/select")
     @ResponseBody
     public Map<String,Object> select(Student student, Model model, HttpSession httpSession){
         System.out.println("select!!!!!");

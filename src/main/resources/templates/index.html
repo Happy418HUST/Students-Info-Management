@@ -130,7 +130,8 @@
     </div>
     <!--表格-->
     <div >
-        <table data-toggle="table"
+        <table id="students"
+               data-toggle="table"
                data-url="/index/data"
                data-toolbar="#toolbar"
                data-show-refresh="true"
@@ -173,7 +174,6 @@
 <!--查询按钮-->
 <script>
     $('#btn_query').on('click', function () {
-        alert("查询！");
         $.ajax({
             url: '/select', //请求的url
             type: 'post', //请求的方式
@@ -182,9 +182,26 @@
                 alert('请求失败');
             },
             success:function (data) {
-                alert(JSON.stringify(data));
-                //$("#students").bootstrapTable('refresh', {url: '/select' });
-                //alert("refresh!");
+                // $("#students").bootstrapTable('destroy');
+                // $('#students').bootstrapTable({
+                //     url: '/select',
+                //     sortable: false,
+                //     columns: [{
+                //         field: 'id',
+                //         title: '学号'
+                //     }, {
+                //         field: 'name',
+                //         title: '姓名'
+                //     }, {
+                //         field: 'major',
+                //         title: '专业'
+                //     }, {
+                //         field: 'joinDate',
+                //         title: '入学日期'
+                //     }, ]
+                // });
+                alert("refresh!");
+
                 //清空table中的html
                 $("#students_tbody").html("");
                 if(data.selectresult!=null)
@@ -202,6 +219,8 @@
                         $("#students_tbody").append(str1);
                     }
                 }
+
+
             }
         });
     })
