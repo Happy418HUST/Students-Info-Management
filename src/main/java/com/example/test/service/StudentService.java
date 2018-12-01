@@ -28,6 +28,16 @@ public interface StudentService {
     })
     int count(Student student);
 
+    @Select("SELECT * FROM STUDENTSMANAGEMENT.Student WHERE name = #{name};")
+    List<Student> findByname(Student student);
+
+    @Select("SELECT * FROM STUDENTSMANAGEMENT.Student WHERE major = #{major};")
+    List<Student> findBymajor(Student student);
+
+    @Select("SELECT * FROM STUDENTSMANAGEMENT.Student WHERE name = #{name} AND major = #{major};")
+    List<Student> findByall(Student student);
+
+
     @Insert("INSERT INTO `STUDENTSMANAGEMENT`.`STUDENT` (`id`, `password`,`name`,`major`,`joinDate`, `state`) VALUES (#{id}, 1234,#{name}, #{major}, #{joinDate} ,1);")
     int insert(Student student);
 }
