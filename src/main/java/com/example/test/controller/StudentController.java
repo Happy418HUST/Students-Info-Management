@@ -19,6 +19,7 @@ public class StudentController {
     public String gotoIndex(Student student,Model model) {
         return "index";
     }
+
 //主界面传值
     @GetMapping("/index/data")
     @ResponseBody
