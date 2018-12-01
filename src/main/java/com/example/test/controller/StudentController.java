@@ -30,7 +30,7 @@ public class StudentController {
     @ResponseBody
     public List<Student> showStudents(Student student,Model model) {
         List<Student> studentList = studentService.list(student);
-
+        System.out.println("read data!");
         return studentList;
     }
     @RequestMapping("/select")
