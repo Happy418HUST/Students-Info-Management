@@ -240,9 +240,7 @@
             autoclose: 1//选择后自动关闭
         });
     }
-
-    $('#btn_delete').on('click', function () {
-        alert("on delete btn start!");
+    function refreshTable(){
         $("#students").bootstrapTable({
             pagination: true,
             pageSize: 15,
@@ -253,39 +251,23 @@
             locale: "zh-CN",
             striped: true,
             toggle:true,
-            ajax: function(request){
-                alert("ajax执行了");
-                var a= $("#students").bootstrapTable('getSelections');
-                if(a.length>0){
-                    //b.val(a[0].id);
-                    alert(JSON.stringify(a));
-                    for(var i =0;i<a.length;i++)
-                    {
-                        $.ajax({
-                            url: '/delete', //请求的url
-                            type: 'post', //请求的方式
-                            data: a[i] ,
-                            error:function (data) {
-                                alert('失败： 删除的ajax post请求失败！');
-                            },
-                            success:function (data) {
-                                alert('成功： 删除的ajax post请求成功！');
-                                alert(JSON.stringify(data));
-                                request.success({
-                                    row : data
-                                });
-                                $('#students').bootstrapTable('load', data);
-                                alert("reload finished!");
-                            }
+            ajax:function(request) {
+                $.ajax({
+                    url:"index/data",
+                    type:"GET",
+                    dataType:"json",
+                    success: function(data){
+                        alert("ajax get success!")
+                        request.success({
+                            row : data
                         });
+                        $('#dataTable table').bootstrapTable('load', data);
+                    },
+                    error:function(error){
+                        console.log(error);
                     }
-                    //刷新页面：
-                    //refreshTable();
-                    //$("#students").bootstrapTable("refresh");
-                    //window.location.href='/index';
-                }
-                else{alert("请选中一行再删除！")}
-            } ,
+                })
+            },
             columns:[{
                 checkbox: "true",
             },{
@@ -296,43 +278,36 @@
                 title:"姓名"
             }]
         });
-        alert("bootstrap table end");
-    })
-    function deleteAjax(request) {
-        //alert("btn_delete!");
-        var a= $("#students").bootstrapTable('getSelections');
-        if(a.length>0){
-            //b.val(a[0].id);
-            alert(JSON.stringify(a));
-            for(var i =0;i<a.length;i++)
-            {
-                $.ajax({
-                    url: '/delete', //请求的url
-                    type: 'post', //请求的方式
-                    data: a[i] ,
-                    error:function (data) {
-                        alert('失败： 删除的ajax post请求失败！');
-                    },
-                    success:function (data) {
-                        alert('成功： 删除的ajax post请求成功！');
-                        alert(JSON.stringify(data));
-                        request.success({
-                            row : data
-                        });
-                        $('#students').bootstrapTable('load', data);
-                        alert("reload finished!");
-                    }
-                });
-            }
-            //刷新页面：
-            //refreshTable();
-            //$("#students").bootstrapTable("refresh");
-            //window.location.href='/index';
-        }
-        else{alert("请选中一行再删除！")}
+        alert("bootstrap table");
     }
-
-
+    $("#btn_delete").on("click",function () {
+            //alert("btn_delete!");
+            var a= $("#students").bootstrapTable('getSelections');
+            if(a.length>0){
+                //b.val(a[0].id);
+                //alert(JSON.stringify(a));
+                var i =0;
+                for(i=0;i<a.length;i++)
+                {
+                    $.ajax({
+                        url: '/delete', //请求的url
+                        type: 'post', //请求的方式
+                        data: a[i] ,
+                        error:function (data) {
+                            alert('失败： 删除的ajax请求失败！');
+                        },
+                        success:function (data) {
+                            //alert('成功： 删除的ajax请求成功！');
+                        }
+                    });
+                }
+                //刷新页面：
+                //$("#students").bootstrapTable("refresh");
+                window.location.href='/index';
+            }
+            else{alert("请选中一行再删除！")}
+        }
+    )
 </script>
 </body>
 </html>
