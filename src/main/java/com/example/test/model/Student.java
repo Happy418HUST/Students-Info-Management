@@ -1,6 +1,7 @@
 package com.example.test.model;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 public class Student {
     private String id;
@@ -9,11 +10,9 @@ public class Student {
     private String major;
     private Date joinDate;
     private int state;
-
     public String getId() {
         return id;
     }
-
     public void setId(String id) {
         this.id = id;
     }
@@ -38,6 +37,8 @@ public class Student {
     }
 
     public void setMajor(String major) {
+
+        System.out.println("setMajor");
         this.major = major;
     }
 
@@ -45,8 +46,16 @@ public class Student {
         return joinDate;
     }
 
-    public void setAddDate(Date addDate) {
-        this.joinDate = addDate;
+    public void setJoinDate(String joinDate) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date d = null;
+        try {
+            d = format.parse(joinDate);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        java.sql.Date date = new java.sql.Date(d.getTime());
+        this.joinDate = date;
     }
 
 
@@ -60,7 +69,8 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Admin [id=" + id + ", name=" + name + ", password=" + password
+        return "Student [id=" + id + ", name=" + name + ", password=" + password
+                +", major=" + major
                 + ", joinDate=" + joinDate + ", state=" + state + "]";
     }
 

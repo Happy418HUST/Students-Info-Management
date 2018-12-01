@@ -41,7 +41,7 @@ public interface StudentService {
     int insert(Student student);
 
     @Update("UPDATE `STUDENTSMANAGEMENT`.`STUDENT` SET `state` = 0 WHERE `id` = #{id} AND `state` = 1;")
-    int deleteById0(Student student);
+    int editById(Student student);
 
     @Delete("DELETE FROM `STUDENTSMANAGEMENT`.`STUDENT`  WHERE `id` = #{id} ;")
     int deleteById(Student student);

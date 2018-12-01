@@ -1,4 +1,5 @@
 package com.example.test.controller;
+import jdk.nashorn.internal.objects.NativeJSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -6,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.InitBinder;
 import com.example.test.model.Student;
 import com.example.test.service.StudentService;
 
@@ -14,6 +16,15 @@ import java.io.Console;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.support.WebBindingInitializer;
+import org.springframework.web.context.request.WebRequest;
+
 @Controller
 public class StudentController {
     @Autowired
@@ -31,6 +42,10 @@ public class StudentController {
     public List<Student> showStudents(Student student,Model model) {
         List<Student> studentList = studentService.list(student);
         System.out.println("read data!");
+        for(int i=0;i<studentList.size();i++)
+        {
+            System.out.println(studentList.get(i));
+        }
         return studentList;
     }
     @RequestMapping("/select")
@@ -64,14 +79,18 @@ public class StudentController {
     @PostMapping("/add")
     public String addStudent(Student student,Model model){
         studentService.insert(student);
+        System.out.println(student);
+        System.out.println(model.toString());
         return "redirect:index";
     }
 
+
     @PostMapping("/delete")
-    public String deleteStudents(Student student,Model model){
+    public List<Student> deleteStudents(Student student,Model model){
         studentService.deleteById(student);
+        List<Student> studentList = studentService.list(student);
         System.out.println("deleteStudents! in controller");
-        return "redirect:index";
+        return studentList;
     }
 
 }
