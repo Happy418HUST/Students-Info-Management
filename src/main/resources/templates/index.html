@@ -134,10 +134,9 @@
                data-toggle="table"
                data-url="/index/data"
                data-toolbar="#toolbar"
-               data-show-refresh="true"
+               data-select-item-name="selectItemName"
                data-show-toggle="true"
                data-show-columns="true"
-               data-click-to-select="true"
                data-pagination="false"
                data-page-size = "3"
                data-page-list = [3，10, 20, 50, 100]
@@ -200,7 +199,7 @@
                 //         title: '入学日期'
                 //     }, ]
                 // });
-                alert("refresh!");
+                //alert("refresh!");
 
                 //清空table中的html
                 $("#students_tbody").html("");
@@ -239,14 +238,31 @@
         });
     }
     $("#btn_delete").on("click",function () {
-        alert("btn_delete!");
-        var deleteItems = $("#students").bootstrapTable('getSelections');
-        $.each(deleteItems, function(i, item) {
-            alert(item.name);
-        });
+        //alert("btn_delete!");
+        var a= $("#students").bootstrapTable('getSelections');
+        if(a.length>0){
+            //b.val(a[0].id);
+            alert(JSON.stringify(a));
+            var i =0;
+            for(i=0;i<a.length;i++)
+            {
+                $.ajax({
+                    url: '/delete', //请求的url
+                    type: 'post', //请求的方式
+                    data: a[i] ,
+                    error:function (data) {
+                        alert('失败： 删除的ajax请求失败！');
+                    },
+                    success:function (data) {
+                        alert('成功： 删除的ajax请求成功！');
+                    }
+                });
+            }
+            $("#btn_delete").bootstrapTable("refresh");
+        }
+        else{alert("请选中一行再删除！")}
         }
     )
-
 </script>
 </body>
 </html>

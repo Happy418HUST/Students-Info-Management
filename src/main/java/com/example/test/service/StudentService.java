@@ -37,7 +37,9 @@ public interface StudentService {
     @Select("SELECT * FROM STUDENTSMANAGEMENT.Student WHERE name = #{name} AND major = #{major};")
     List<Student> findByall(Student student);
 
-
     @Insert("INSERT INTO `STUDENTSMANAGEMENT`.`STUDENT` (`id`, `password`,`name`,`major`,`joinDate`, `state`) VALUES (#{id}, 1234,#{name}, #{major}, #{joinDate} ,1);")
     int insert(Student student);
+
+    @Update("UPDATE `STUDENTSMANAGEMENT`.`STUDENT` SET `state` = 0 WHERE `id` = #{id};")
+    int deleteById(Student student);
 }

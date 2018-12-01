@@ -69,4 +69,11 @@ public class StudentController {
         return "redirect:index";
     }
 
+    @PostMapping("/delete")
+    public String deleteStudents(Student student,Model model){
+        studentService.deleteById(student);
+        System.out.println("deleteStudents! in controller");
+        return "redirect:index";
+    }
+
 }
