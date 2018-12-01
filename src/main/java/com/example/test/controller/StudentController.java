@@ -30,9 +30,9 @@ public class StudentController {
         model.addAttribute("student",student);
         return studentList;
     }
-    @PostMapping("/index/add")
+    @PostMapping("/add")
     public String addStudent(Student student,Model model){
         studentService.insert(student);
-        return "redirect:";
+        return "redirect:index";
     }
 }
