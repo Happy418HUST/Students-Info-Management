@@ -41,11 +41,6 @@ public class StudentController {
     @ResponseBody
     public List<Student> showStudents(Student student,Model model) {
         List<Student> studentList = studentService.list(student);
-        System.out.println("read data!");
-        for(int i=0;i<studentList.size();i++)
-        {
-            System.out.println(studentList.get(i));
-        }
         return studentList;
     }
     @RequestMapping("/select")
@@ -58,7 +53,9 @@ public class StudentController {
         Map<String,Object> map=new HashMap<String, Object>();
         if(student.getName()== ""){
             System.out.println("student.getName()== null");
-            if(student.getMajor()== ""){System.out.println("both empty");}
+            if(student.getMajor()== ""){System.out.println("both empty");
+            studentList = studentService.list(student);
+            }
             else{studentList = studentService.findBymajor(student);
                 System.out.println("major only");}
         }
@@ -79,18 +76,20 @@ public class StudentController {
     @PostMapping("/add")
     public String addStudent(Student student,Model model){
         studentService.insert(student);
-        System.out.println(student);
-        System.out.println(model.toString());
         return "redirect:index";
     }
 
 
     @PostMapping("/delete")
-    public List<Student> deleteStudents(Student student,Model model){
+    public String deleteStudents(Student student,Model model){
         studentService.deleteById(student);
-        List<Student> studentList = studentService.list(student);
-        System.out.println("deleteStudents! in controller");
-        return studentList;
+        return "redirect:index";
+    }
+
+    @PostMapping("/edit")
+    public String editStudent(Student student,Model model){
+        studentService.editById(student);
+        return "redirect:index";
     }
 
 }

@@ -100,8 +100,8 @@
                         </div>
                         <br>
                         <label class="" for="add_joinDate">入学日期</label>
-                        <div class="input-group date myDatetimepicker" id = "edit_joinDate">
-                            <input type="text" class="form-control" name="入学日期">
+                        <div class="input-group date myDatetimepicker" >
+                            <input type="text" class="form-control" name="joinDate" id = "edit_joinDate">
                             <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -109,7 +109,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button type="submit" class="btn btn-primary">保存</button>
+                        <button type="button" class="btn btn-primary" id = "btn_edit_save">保存</button>
                     </div>
                 </form>
 
@@ -123,7 +123,8 @@
         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal_add">
             <i class="glyphicon glyphicon-plus">新增</i>
         </button>
-        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal_edit">
+        <!--<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal_edit" id="btn_edit">-->
+        <button type="button" class="btn btn-warning"  id="btn_edit">
             <i class="glyphicon glyphicon-pencil">修改</i>
         </button>
         <button type="button" class="btn btn-danger" id="btn_delete">
@@ -184,25 +185,6 @@
                 alert('请求失败');
             },
             success:function (data) {
-                // $("#students").bootstrapTable('destroy');
-                // $('#students').bootstrapTable({
-                //     url: '/select',
-                //     sortable: false,
-                //     columns: [{
-                //         field: 'id',
-                //         title: '学号'
-                //     }, {
-                //         field: 'name',
-                //         title: '姓名'
-                //     }, {
-                //         field: 'major',
-                //         title: '专业'
-                //     }, {
-                //         field: 'joinDate',
-                //         title: '入学日期'
-                //     }, ]
-                // });
-                //alert("refresh!");
 
                 //清空table中的html
                 $("#students_tbody").html("");
@@ -240,46 +222,46 @@
             autoclose: 1//选择后自动关闭
         });
     }
-    function refreshTable(){
-        $("#students").bootstrapTable({
-            pagination: true,
-            pageSize: 15,
-            pageList: [5, 10, 15, 20],
-            showColumns: true,
-            showRefresh: true,
-            showToggle: true,
-            locale: "zh-CN",
-            striped: true,
-            toggle:true,
-            ajax:function(request) {
+    $("#btn_edit").on("click",function () {
+        var a= $("#students").bootstrapTable('getSelections');
+        if(a.length!=1)
+        {
+            $('#modal_edit').modal('hide')
+            alert("请选择则一行数据修改！");
+        }
+        else
+        {
+            $('#modal_edit').modal('show');
+        }
+    })
+    $("#btn_edit_save").on("click",function () {
+            //alert("btn_edit!");
+            var a= $("#students").bootstrapTable('getSelections');
+            if(a.length==1){
+                alert($("#edit_joinDate").val());
                 $.ajax({
-                    url:"index/data",
-                    type:"GET",
-                    dataType:"json",
-                    success: function(data){
-                        alert("ajax get success!")
-                        request.success({
-                            row : data
-                        });
-                        $('#dataTable table').bootstrapTable('load', data);
+                    url: '/edit', //请求的url
+                    type: 'post', //请求的方式
+                    data: {id: a[0].id,
+                        name: $("#edit_name").val(),
+                        major:$("#edit_major").val(),
+                        joinDate:$("#edit_joinDate").val(),
                     },
-                    error:function(error){
-                        console.log(error);
+                    error:function (data) {
+                        alert('失败： 修改的ajax请求失败！');
+                    },
+                    success:function (data) {
+                        alert('成功： 修改的ajax请求成功！');
+                        alert(data);
                     }
-                })
-            },
-            columns:[{
-                checkbox: "true",
-            },{
-                field: "id",
-                title:"学号"
-            }, {
-                field: "name",
-                title:"姓名"
-            }]
-        });
-        alert("bootstrap table");
-    }
+                });
+                //刷新页面：
+                //$("#students").bootstrapTable("refresh");
+                window.location.href='/index';
+            }
+            else{alert("请选中一行修改！")}
+        }
+    )
     $("#btn_delete").on("click",function () {
             //alert("btn_delete!");
             var a= $("#students").bootstrapTable('getSelections');

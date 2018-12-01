@@ -55,6 +55,10 @@ public class Student {
             e.printStackTrace();
         }
         java.sql.Date date = new java.sql.Date(d.getTime());
+        System.out.println("********************************");
+        System.out.println(joinDate);
+        System.out.println(date);
+        System.out.println("********************************");
         this.joinDate = date;
     }
 

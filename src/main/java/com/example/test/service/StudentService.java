@@ -40,7 +40,7 @@ public interface StudentService {
     @Insert("INSERT INTO `STUDENTSMANAGEMENT`.`STUDENT` (`id`, `password`,`name`,`major`,`joinDate`, `state`) VALUES (#{id}, 1234,#{name}, #{major}, #{joinDate} ,1);")
     int insert(Student student);
 
-    @Update("UPDATE `STUDENTSMANAGEMENT`.`STUDENT` SET `state` = 0 WHERE `id` = #{id} AND `state` = 1;")
+    @Update("UPDATE `STUDENTSMANAGEMENT`.`STUDENT` SET `name` = #{name},`major` = #{major},`joinDate` = #{joinDate}  WHERE `id` = #{id} ;")
     int editById(Student student);
 
     @Delete("DELETE FROM `STUDENTSMANAGEMENT`.`STUDENT`  WHERE `id` = #{id} ;")
