@@ -6,13 +6,13 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Delete;
 
 import com.example.test.model.Student;
 
 
 @Mapper
 public interface StudentService {
-
     @Select("SELECT * FROM STUDENTSMANAGEMENT.Student WHERE ID = #{id};")
     Student findById(Student studen);
 
@@ -40,6 +40,10 @@ public interface StudentService {
     @Insert("INSERT INTO `STUDENTSMANAGEMENT`.`STUDENT` (`id`, `password`,`name`,`major`,`joinDate`, `state`) VALUES (#{id}, 1234,#{name}, #{major}, #{joinDate} ,1);")
     int insert(Student student);
 
-    @Update("UPDATE `STUDENTSMANAGEMENT`.`STUDENT` SET `state` = 0 WHERE `id` = #{id};")
+    @Update("UPDATE `STUDENTSMANAGEMENT`.`STUDENT` SET `state` = 0 WHERE `id` = #{id} AND `state` = 1;")
+    int deleteById0(Student student);
+
+    @Delete("DELETE FROM `STUDENTSMANAGEMENT`.`STUDENT`  WHERE `id` = #{id} ;")
     int deleteById(Student student);
+
 }

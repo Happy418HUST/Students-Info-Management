@@ -136,11 +136,11 @@
                data-toolbar="#toolbar"
                data-select-item-name="selectItemName"
                data-show-toggle="true"
+               data-show-refresh="true"
                data-show-columns="true"
                data-pagination="false"
                data-page-size = "3"
                data-page-list = [3，10, 20, 50, 100]
-
                >
             <thead>
             <tr>
@@ -258,7 +258,8 @@
                     }
                 });
             }
-            $("#btn_delete").bootstrapTable("refresh");
+            $("#students").bootstrapTable("refresh");
+
         }
         else{alert("请选中一行再删除！")}
         }

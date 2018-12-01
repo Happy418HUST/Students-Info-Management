@@ -30,9 +30,7 @@ public class StudentController {
     @ResponseBody
     public List<Student> showStudents(Student student,Model model) {
         List<Student> studentList = studentService.list(student);
-//        //输出
-//        model.addAttribute("studentList", studentList);
-//        model.addAttribute("student",student);
+
         return studentList;
     }
     @RequestMapping("/select")
