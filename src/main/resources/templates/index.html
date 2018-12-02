@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Students' Information Management</title>
+    <title>418学生信息管理系统</title>
     <!-- css -->
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
     <link th:href="@{/css/bootstrap-table.css}" rel="stylesheet" />
@@ -120,14 +120,14 @@
     <br>
     <!--toolbar-->
     <div id="toolbar" class="btn-group">
-        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal_add">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_add">
             <i class="glyphicon glyphicon-plus">新增</i>
         </button>
         <!--<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal_edit" id="btn_edit">-->
         <button type="button" class="btn btn-warning"  id="btn_edit">
             <i class="glyphicon glyphicon-pencil">修改</i>
         </button>
-        <button type="button" class="btn btn-danger" id="btn_delete">
+        <button type="button" class="btn btn-success" id="btn_delete">
             <i class="glyphicon glyphicon-trash">删除</i>
         </button>
     </div>
@@ -227,10 +227,13 @@
         if(a.length!=1)
         {
             $('#modal_edit').modal('hide')
-            alert("请选择则一行数据修改！");
+            alert("请选择一行数据修改！");
         }
         else
         {
+            $("#edit_name").val(a[0].name);
+            $("#edit_major").val(a[0].major);
+            $("#edit_joinDate").val(a[0].joinDate);
             $('#modal_edit').modal('show');
         }
     })

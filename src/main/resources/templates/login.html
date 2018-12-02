@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>INSPINIA | Login</title>
+    <title>登录：418学生信息管理系统</title>
 
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
     <link th:href="@{/font-awesome/css/font-awesome.css}" rel="stylesheet" />
@@ -24,13 +24,13 @@
 <div class="middle-box text-center loginscreen animated fadeInDown">
     <div>
         <div>
-            <h2 class="logo-name">MX</h2>
+            <h2 class="logo-name">418</h2>
         </div>
-        <h3>Welcome to MOXI</h3>
+        <h3>学生信息管理系统</h3>
         <p>
-            我有故事，你有酒吗？
+            学生信息管理，我们是专业的。
         </p>
-        <p>Login in. To see it in action.</p>
+
         <form class="m-t" role="form" action="login" method="post">
             <div class="form-group">
                 <!--在这里把数据传给后台！！在AdminService中返回一个实体类-->
@@ -39,15 +39,11 @@
             <div class="form-group">
                 <input type="password" class="form-control" placeholder="password" name="password" required="" />
             </div>
-            <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
-            <a th:href="@{register}" href="#"><small>Forgot password?</small></a>
-            <p class="text-muted text-center">
-                <small>Do not have an account?</small>
-            </p>
-            <a class="btn btn-sm btn-white btn-block" th:href="@{register}" href="register.html">Create an account</a>
+            <button type="submit" class="btn btn-primary block full-width m-b">登录</button>
+
         </form>
         <p class="m-t">
-            <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small>
+            <small>华中科技大学软件学院，数字媒体技术1501，418&copy; 2018</small>
         </p>
     </div>
 </div>

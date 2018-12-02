@@ -4377,6 +4377,7 @@ body.mini-navbar.fixed-sidebar .logo-element {
   padding: 100px 20px 20px 20px;
 }
 .logo-name {
+  text-align: center;
   color: #e6e6e6;
   font-size: 120px;
   font-weight: 800;
