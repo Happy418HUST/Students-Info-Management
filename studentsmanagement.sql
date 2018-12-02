@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2018-11-30 14:31:52
+Date: 2018-12-02 20:16:32
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -47,7 +47,6 @@ CREATE TABLE `student` (
   `id` varchar(255) NOT NULL,
   `password` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `age` int(11) DEFAULT NULL,
   `major` varchar(255) DEFAULT NULL,
   `joinDate` date DEFAULT NULL,
   `state` tinyint(4) DEFAULT NULL,
@@ -57,9 +56,6 @@ CREATE TABLE `student` (
 -- ----------------------------
 -- Records of student
 -- ----------------------------
-INSERT INTO `student` VALUES ('1', '1234', 'yuqiao', '10', 'software', '2018-11-30', '1');
-INSERT INTO `student` VALUES ('2', '1234', '中文名', '10', 'digital', '2018-11-30', '1');
-INSERT INTO `student` VALUES ('3', '141', '3', null, null, null, '1');
-INSERT INTO `student` VALUES ('4', null, '4', null, null, null, '1');
-INSERT INTO `student` VALUES ('5', null, '5', null, null, null, '1');
-INSERT INTO `student` VALUES ('6', null, '6', null, null, null, '1');
+INSERT INTO `student` VALUES ('1', '1234', '新人', '新人', '2018-12-02', '1');
+INSERT INTO `student` VALUES ('454', '1234', '1', '1', '2019-01-01', '1');
+INSERT INTO `student` VALUES ('q34q4t', '1234', 'q3434q', '3q4534q5', '2018-12-02', '1');

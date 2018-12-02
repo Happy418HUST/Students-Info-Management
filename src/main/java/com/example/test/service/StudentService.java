@@ -13,37 +13,37 @@ import com.example.test.model.Student;
 
 @Mapper
 public interface StudentService {
-    @Select("SELECT * FROM STUDENTSMANAGEMENT.Student WHERE ID = #{id};")
+    @Select("SELECT * FROM studentsManagement.student WHERE id = #{id};")
     List<Student> findById(Student studen);
 
     @Select({
-            "SELECT * FROM STUDENTSMANAGEMENT.STUDENT ",
-            "WHERE STATE = 1 ;",
+            "SELECT * FROM studentsManagement.student ",
+            "WHERE state = 1 ;",
     })
     List<Student> list(Student student);
 
     @Select({
-            "SELECT COUNT(*) FROM STUDENTSMANAGEMENT.STUDENT N ",
-            "WHERE N.STATE = 1 ;",
+            "SELECT COUNT(*) FROM studentsManagement.student N ",
+            "WHERE N.state = 1 ;",
     })
     int count(Student student);
 
-    @Select("SELECT * FROM STUDENTSMANAGEMENT.Student WHERE name = #{name};")
+    @Select("SELECT * FROM studentsManagement.student WHERE name = #{name};")
     List<Student> findByname(Student student);
 
-    @Select("SELECT * FROM STUDENTSMANAGEMENT.Student WHERE major = #{major};")
+    @Select("SELECT * FROM studentsManagement.student WHERE major = #{major};")
     List<Student> findBymajor(Student student);
 
-    @Select("SELECT * FROM STUDENTSMANAGEMENT.Student WHERE name = #{name} AND major = #{major};")
+    @Select("SELECT * FROM studentsManagement.student WHERE name = #{name} AND major = #{major};")
     List<Student> findByall(Student student);
 
-    @Insert("INSERT INTO `STUDENTSMANAGEMENT`.`STUDENT` (`id`, `password`,`name`,`major`,`joinDate`, `state`) VALUES (#{id}, 1234,#{name}, #{major}, #{joinDate} ,1);")
+    @Insert("INSERT INTO `studentsManagement`.`student` (`id`, `password`,`name`,`major`,`joinDate`, `state`) VALUES (#{id}, 1234,#{name}, #{major}, #{joinDate} ,1);")
     int insert(Student student);
 
-    @Update("UPDATE `STUDENTSMANAGEMENT`.`STUDENT` SET `name` = #{name},`major` = #{major},`joinDate` = #{joinDate}  WHERE `id` = #{id} ;")
+    @Update("UPDATE `studentsManagement`.`student` SET `name` = #{name},`major` = #{major},`joinDate` = #{joinDate}  WHERE `id` = #{id} ;")
     int editById(Student student);
 
-    @Delete("DELETE FROM `STUDENTSMANAGEMENT`.`STUDENT`  WHERE `id` = #{id} ;")
+    @Delete("DELETE FROM `studentsManagement`.`student`  WHERE `id` = #{id} ;")
     int deleteById(Student student);
 
 }
