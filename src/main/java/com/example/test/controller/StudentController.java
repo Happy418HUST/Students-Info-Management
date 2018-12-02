@@ -42,6 +42,8 @@ public class StudentController {
     return "input_error";
 }
 
+
+
 //主界面传值
     @GetMapping("/index/data")
     @ResponseBody
