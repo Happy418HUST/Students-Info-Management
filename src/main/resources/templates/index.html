@@ -238,7 +238,7 @@
             //alert("btn_edit!");
             var a= $("#students").bootstrapTable('getSelections');
             if(a.length==1){
-                alert($("#edit_joinDate").val());
+                //alert($("#edit_joinDate").val());
                 $.ajax({
                     url: '/edit', //请求的url
                     type: 'post', //请求的方式
@@ -251,8 +251,8 @@
                         alert('失败： 修改的ajax请求失败！');
                     },
                     success:function (data) {
-                        alert('成功： 修改的ajax请求成功！');
-                        alert(data);
+                        //alert('成功： 修改的ajax请求成功！');
+                        //alert(data);
                     }
                 });
                 //刷新页面：

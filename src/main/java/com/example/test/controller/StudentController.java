@@ -36,36 +36,38 @@ public class StudentController {
         return "index";
     }
 
+//  errorpage：id重复：
+    @RequestMapping("/input_error")
+    public String gotoInputError(Student student,Model model) {
+    return "input_error";
+}
+
 //主界面传值
     @GetMapping("/index/data")
     @ResponseBody
     public List<Student> showStudents(Student student,Model model) {
+        System.out.println("************* studentService.list(student);  **************");
         List<Student> studentList = studentService.list(student);
         return studentList;
     }
     @RequestMapping("/select")
     @ResponseBody
     public Map<String,Object> select(Student student, Model model, HttpSession httpSession){
-        System.out.println("select!!!!!");
-        System.out.println(student.getName());
-        System.out.println(student.getMajor());
         List<Student> studentList = null;
         Map<String,Object> map=new HashMap<String, Object>();
         if(student.getName()== ""){
-            System.out.println("student.getName()== null");
-            if(student.getMajor()== ""){System.out.println("both empty");
-            studentList = studentService.list(student);
+            if(student.getMajor()== ""){
+                studentList = studentService.list(student);
             }
-            else{studentList = studentService.findBymajor(student);
-                System.out.println("major only");}
+            else{
+                studentList = studentService.findBymajor(student);
+            }
         }
         else
         {
             if(student.getMajor()== ""){
-                System.out.println("只有名字");
                 studentList = studentService.findByname(student);}
             else{
-                System.out.println("both ");
                 studentList = studentService.findByall(student);}
         }
         map.put("selectresult", studentList);
@@ -75,8 +77,18 @@ public class StudentController {
 
     @PostMapping("/add")
     public String addStudent(Student student,Model model){
-        studentService.insert(student);
-        return "redirect:index";
+        List<Student> studentList = studentService.findById(student);
+        if(studentList.size()>0)
+        {
+            return "redirect:input_error";
+        }
+        else
+        {
+            System.out.println("************* studentService.insert(student);  **************");
+            System.out.println(student);
+            studentService.insert(student);
+            return "redirect:index";
+        }
     }
 
 

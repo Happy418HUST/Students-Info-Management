@@ -14,7 +14,7 @@ import com.example.test.model.Student;
 @Mapper
 public interface StudentService {
     @Select("SELECT * FROM STUDENTSMANAGEMENT.Student WHERE ID = #{id};")
-    Student findById(Student studen);
+    List<Student> findById(Student studen);
 
     @Select({
             "SELECT * FROM STUDENTSMANAGEMENT.STUDENT ",

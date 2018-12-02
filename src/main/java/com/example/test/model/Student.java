@@ -37,28 +37,39 @@ public class Student {
     }
 
     public void setMajor(String major) {
-
-        System.out.println("setMajor");
         this.major = major;
     }
 
     public Date getJoinDate() {
+        System.out.println("getJoinDate :" + joinDate);
         return joinDate;
     }
 
     public void setJoinDate(String joinDate) {
+
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date d = null;
         try {
             d = format.parse(joinDate);
+//            System.out.println("d.getTime()"+d.getTime());
+//            System.out.println("d.toString()" + d.toString());
+//            long addTime = 1;//用1为乘的基数
+//            addTime *= 1;
+//            addTime *=24; //1天24小时
+//            addTime *=60; //一小时60分钟
+//            addTime *=60; //一分钟60秒
+//            addTime *=1000; //一秒1000毫秒
+//            d = new Date(d.getTime()+addTime);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         java.sql.Date date = new java.sql.Date(d.getTime());
-        System.out.println("********************************");
-        System.out.println(joinDate);
-        System.out.println(date);
-        System.out.println("********************************");
+//        System.out.println("********************************");
+//        System.out.println(joinDate);
+//        System.out.println(date);
+//        System.out.println("********************************");
+        System.out.println("setJoinDate:   String:"+joinDate + "   Date :" + date);
         this.joinDate = date;
     }
 
