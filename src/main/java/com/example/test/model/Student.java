@@ -51,16 +51,6 @@ public class Student {
         java.util.Date d = null;
         try {
             d = format.parse(joinDate);
-//            System.out.println("d.getTime()"+d.getTime());
-//            System.out.println("d.toString()" + d.toString());
-//            long addTime = 1;//用1为乘的基数
-//            addTime *= 1;
-//            addTime *=24; //1天24小时
-//            addTime *=60; //一小时60分钟
-//            addTime *=60; //一分钟60秒
-//            addTime *=1000; //一秒1000毫秒
-//            d = new Date(d.getTime()+addTime);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
